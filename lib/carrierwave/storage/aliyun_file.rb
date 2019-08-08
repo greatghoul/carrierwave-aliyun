@@ -26,6 +26,18 @@ module CarrierWave
         nil
       end
 
+      def empty?
+        @path.nil? || ! self.exists?
+      end
+
+      def exists?
+        res = bucket.get(@path)
+        true
+      rescue => e
+        puts "file is not exist in bucket"
+        false
+      end
+
       ##
       # Generate file url
       # params
